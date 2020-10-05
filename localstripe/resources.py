@@ -2791,3 +2791,31 @@ class Token(StripeObject):
 
         self.type = 'card'
         self.card = card_obj
+
+
+class Cardholder(StripeObject):
+    object = 'issuing.cardholder'
+    _id_prefix = 'issuing.cardholder_'
+
+    def __init__(self, company=None, email=None, metadata=None,
+                 name=None, phone_number=None, requirements=None,
+                 spending_controls=None,status=None,type=None,
+                 **kwargs):
+        if kwargs:
+            raise UserError(400, 'Unexpected ' + ', '.join(kwargs.keys()))
+
+        # All exceptions must be raised before this point.
+        super().__init__()
+
+        self.billing = None
+        self.company = company
+        self.email = email
+        self.individual = None
+        self.livemode = False
+        self.metadata = metadata or {}
+        self.name = name
+        self.phone_number = phone_number
+        self.requirements = requirements
+        self.spending_controls = spending_controls
+        self.status = status
+        self.type = type
