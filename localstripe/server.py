@@ -29,6 +29,7 @@ from .resources import Charge, Coupon, Customer, \
                        PaymentMethod, Plan, Product, Refund, SetupIntent, \
                        Source, Subscription, SubscriptionItem, TaxRate, \
                        Token, extra_apis, store
+from .resources import Authorization, Card, Cardholder
 from .errors import UserError
 from .webhooks import register_webhook
 
