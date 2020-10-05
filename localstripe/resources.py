@@ -2793,14 +2793,43 @@ class Token(StripeObject):
         self.card = card_obj
 
 
+class Authorization(StripeObject):
+    object = 'issuing.authorization'
+    _id_prefix = 'issuing.authorization_'
+
+    def __init__(self, metadata=None, **kwargs):
+        if kwargs:
+            raise UserError(400, 'Unexpected ' + ', '.join(kwargs.keys()))
+
+        # All exceptions must be raised before this point.
+        super().__init__()
+
+        self.amount = None
+        self.amount_details = {}
+        self.approved = None
+        self.authorization_method = None
+        self.balance_transactions = {}
+        self.card = {}
+        self.cardholder = None
+        self.currency = None
+        self.livemode = None
+        self.merchant_amount = None
+        self.merchant_currency = None
+        self.merchant_data = {}
+        self.metadata = metadata
+        self.pending_request = None
+        self.request_history = {}
+        self.status = None
+        self.transactions = {}
+        self.verification_data = {}
+        self.wallet = None
+
+
 class Cardholder(StripeObject):
     object = 'issuing.cardholder'
     _id_prefix = 'issuing.cardholder_'
 
-    def __init__(self, company=None, email=None, metadata=None,
-                 name=None, phone_number=None, requirements=None,
-                 spending_controls=None,status=None,type=None,
-                 **kwargs):
+    def __init__(self, metadata=None, **kwargs):
         if kwargs:
             raise UserError(400, 'Unexpected ' + ', '.join(kwargs.keys()))
 
@@ -2808,14 +2837,14 @@ class Cardholder(StripeObject):
         super().__init__()
 
         self.billing = None
-        self.company = company
-        self.email = email
+        self.company = None
+        self.email = None
         self.individual = None
         self.livemode = False
         self.metadata = metadata or {}
-        self.name = name
-        self.phone_number = phone_number
-        self.requirements = requirements
-        self.spending_controls = spending_controls
-        self.status = status
+        self.name = None
+        self.phone_number = None
+        self.requirements = None
+        self.spending_controls = None
+        self.status = None
         self.type = type
