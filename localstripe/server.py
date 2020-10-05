@@ -280,11 +280,11 @@ for cls in (Charge, Coupon, Customer, Event, Invoice, InvoiceItem,
 for cls in (Cardholder, Card, Authorization):
     for method, url, func in (
             # POST /v1/issuing/cardholders
-            ('POST', '/v1/' + cls.object + 's', api_create),
-            ('GET', '/v1/' + cls.object + 's/{id}', api_retrieve),
-            ('POST', '/v1/' + cls.object + 's/{id}', api_update),
-            ('DELETE', '/v1/' + cls.object + 's/{id}', api_delete),
-            ('GET', '/v1/' + cls.object + 's', api_list_all)):
+            ('POST', '/v1/issuing/' + cls.object + 's', api_create),
+            ('GET', '/v1/issuing/' + cls.object + 's/{id}', api_retrieve),
+            ('POST', '/v1/issuing/' + cls.object + 's/{id}', api_update),
+            ('DELETE', '/v1/issuing/' + cls.object + 's/{id}', api_delete),
+            ('GET', '/v1/issuing/' + cls.object + 's', api_list_all)):
         app.router.add_route(method, url, func(cls, url))
 
 # issuing/authorizations/approve
