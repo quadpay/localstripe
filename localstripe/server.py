@@ -268,7 +268,6 @@ for cls in (Charge, Coupon, Customer, Event, Invoice, InvoiceItem,
             PaymentIntent, PaymentMethod, Plan, Product, Refund, SetupIntent,
             Source, Subscription, SubscriptionItem, TaxRate, Token):
     for method, url, func in (
-            # POST /v1/charges
             ('POST', '/v1/' + cls.object + 's', api_create),
             ('GET', '/v1/' + cls.object + 's/{id}', api_retrieve),
             ('POST', '/v1/' + cls.object + 's/{id}', api_update),
@@ -279,7 +278,6 @@ for cls in (Charge, Coupon, Customer, Event, Invoice, InvoiceItem,
 #  Issuing endpoints
 for cls in (Cardholder, Card, Authorization):
     for method, url, func in (
-            # POST /v1/issuing/cardholders
             ('POST', '/v1/issuing/' + cls.object + 's', api_create),
             ('GET', '/v1/issuing/' + cls.object + 's/{id}', api_retrieve),
             ('POST', '/v1/issuing/' + cls.object + 's/{id}', api_update),
@@ -288,7 +286,7 @@ for cls in (Cardholder, Card, Authorization):
         app.router.add_route(method, url, func(cls, url))
 
 # issuing/authorizations/approve
-app.router.add_post('/v1/issuing/authorizations/{id}/approve', func(cls, url))
+app.router.add_post('/v1/issuing/authorizations/{id}/approve', api_create)
 
 
 def localstripe_js(request):
